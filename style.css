@@ -17,10 +17,15 @@ body {
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
   }
+  /* .invitation {
+    width: 100%;
+  } */
   
   .header, .location, .footer {
     padding: 20px;
+    /* height: 100vh; Cada sección ocupa la altura completa de la pantalla */
   }
+  
   
   .header {
     background: url('img/fondo1.png') no-repeat center center/cover;
@@ -30,13 +35,14 @@ body {
   }
   
   .location {
-    background: #f8f9fa;
+    background: url('img/fondo2.png') no-repeat center center/cover;
     color: #333;
-    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
   
   .footer {
-    background: url('img/fondo2.jpg') no-repeat center center/cover;
+    background: url('img/fondo3.jpg') no-repeat center center/cover;
     padding-top: 40px;
     padding-bottom: 40px;
     font-style: italic;

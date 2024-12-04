@@ -1,30 +1,165 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invitación XV Años</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Invitación con Cuenta Regresiva</title>
+  <style>
+    /* Estilos generales */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Carousel vertical */
+    .carousel {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .slide {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      scroll-snap-align: start;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Contenedor de texto superpuesto */
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .slide-content h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .slide-content p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    /* Estilo para la cuenta regresiva */
+    .countdown {
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1.2em;
+    }
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+      .slide-content h1 {
+        font-size: 1.8em;
+      }
+
+      .slide-content p {
+        font-size: 1em;
+      }
+
+      .countdown {
+        font-size: 1em;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="invitation">
-    <section class="header">
-      <h1>XV Años</h1>
-      <h2>María Paulette Pérez Alvarado</h2>
-      <p>29 de diciembre, 2024</p>
-      <p>01:00 PM</p>
-    </section>
 
-    <section class="location">
-      <h3>Ubicación del evento:</h3>
-      <p>Salón Quinta Santa Rosa</p>
-      <p>Segunda Norte, Revolución Mexicana, Chiapas, México</p>
-    </section>
+  <!-- Carousel vertical -->
+  <div class="carousel">
+    <!-- Slide 1 -->
+    <div class="slide">
+      <img src="img/fondo1.png" alt="Imagen 1">
+      <div class="slide-content">
+        <h1>¡Bienvenido al Evento!</h1>
+        <p>Estamos emocionados de verte aquí.</p>
+        <!-- <div class="countdown" id="countdown1"></div> -->
+      </div>
+    </div>
 
-    <section class="footer">
-      <p>Ten cuidado con lo que deseas</p>
-      <p>- María Paulette Pérez Alvarado</p>
-    </section>
+    <!-- Slide 2 -->
+    <div class="slide">
+      <img src="img/fondo2.jpg" alt="Imagen 2">
+      <div class="slide-content">
+        <h1>Detalles del Evento</h1>
+        <p>Fecha: 25 de diciembre de 2024<br>Hora: 8:00 PM<br>Lugar: Salón de Fiestas XYZ</p>
+        <!-- <div class="countdown" id="countdown2"></div> -->
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+      <img src="img/fondo3.jpg" alt="Imagen 3">
+      <div class="slide-content">
+        <h1>¡No Faltes!</h1>
+        <p>Confirma tu asistencia antes del 20 de diciembre.</p>
+        <div class="countdown" id="countdown3"></div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    // Configuración de las fechas de los eventos
+    const eventDates = [
+      new Date("2024-12-25T00:00:00"), // Fecha para el slide 1
+      new Date("2024-12-20T00:00:00"), // Fecha para el slide 2
+      new Date("2024-12-15T00:00:00")  // Fecha para el slide 3
+    ];
+
+    // Función para actualizar la cuenta regresiva
+    function updateCountdown(slideIndex, countdownElementId) {
+      const now = new Date();
+      const diff = eventDates[slideIndex] - now;
+
+      if (diff <= 0) {
+        document.getElementById(countdownElementId).innerText = "¡El evento ha comenzado!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById(countdownElementId).innerText = 
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    // Inicializar las cuentas regresivas
+    setInterval(() => {
+      updateCountdown(0, "countdown1");
+      updateCountdown(1, "countdown2");
+      updateCountdown(2, "countdown3");
+    }, 1000);
+  </script>
+
 </body>
 </html>
